@@ -1,0 +1,46 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper, includehead, margin=6.35mm, headsep=1.65mm]{geometry} %margins
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english,italian]{babel}
+
+\usepackage{pdflscape} % Landscape pages
+\usepackage{multicol}  % Multi-column pages
+\usepackage[center,medium,compact]{titlesec} % Title size and spacing
+
+\usepackage{fancyhdr} % to change header and footers
+
+\usepackage[pdftex]{graphicx} % Required for including pictures
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem} 
+
+
+\usepackage[all]{nowidow} % Tries to remove widows
+
+% ----------------
+% Fonts
+% ----------------
+\usepackage[sc,osf]{mathpazo}   % With old-style figures and real smallcaps.
+\linespread{1.025}              % Palatino leads a little more leading
+\usepackage[euler-digits,small]{eulervm} % Euler for math and numbers
+\AtBeginDocument{\renewcommand{\hbar}{\hslash}}
+
+\usepackage[tracking,protrusion=true,expansion=true]{microtype} % Improves typography, load after fontpackage is selected
+
+\pagestyle{fancy} % Turn on the style
+\fancyhf{} % Start with clearing everything in the header and footer
+\rhead{\thepage}
+\lhead{Università degli Studi di Verona}
+
+\usepackage{blindtext}
+
+\begin{document}
+\begin{landscape}
+\begin{multicols}{2}
+
+\blinddocument
+
+\end{multicols}
+\end{landscape}
+\end{document}
