@@ -65,7 +65,7 @@ with open("${saved}", 'r') as f:
 
         if re.match("\/\*", l):
             comment_state = True
-            new_file[-1] = new_file[-1].strip() + ' '
+            new_file[-1] = new_file[-1].strip()
         if re.match("\*\/", l):
             comment_state = False
             complexity_state = False
