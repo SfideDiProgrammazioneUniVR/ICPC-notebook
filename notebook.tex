@@ -12,9 +12,8 @@
 
 \usepackage[pdftex]{graphicx} % Required for including pictures
 \usepackage{listings}
-\usepackage{xcolor}
+\usepackage[usenames,dvipsnames]{color}
 \usepackage{enumitem} 
-
 
 \usepackage[all]{nowidow} % Tries to remove widows
 
@@ -33,13 +32,28 @@
 \rhead{\thepage}
 \lhead{Università degli Studi di Verona}
 
-\usepackage{blindtext}
+\renewcommand{\ttdefault}{cmtt}
+%\renewcommand{\ttdefault}{pcr}
+\lstdefinestyle{cpp}{
+    language=C++,
+    breaklines=true,
+    showstringspaces=false,
+    %belowcaptionskip=1\baselineskip,
+    xleftmargin=\parindent,
+    basicstyle=\fontsize{5.5}{6}\ttfamily\bfseries,
+    keywordstyle=\bfseries\color{NavyBlue},
+    commentstyle=\itshape\color{RedViolet}\tiny,
+    identifierstyle=\color{Black},
+    stringstyle=\color{LimeGreen},
+    extendedchars=\true,
+    inputencoding=utf8x,
+}
 
 \begin{document}
 \begin{landscape}
-\begin{multicols}{2}
+\begin{multicols}{3}
 
-\blinddocument
+    \input{code.tex}
 
 \end{multicols}
 \end{landscape}
