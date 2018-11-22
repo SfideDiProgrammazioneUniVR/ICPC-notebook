@@ -31,8 +31,10 @@ for code in $REPO/$CODE_EXT; do
     done
 done
 
+# File temporaneo per test di compilazione
 tmp=$(mktemp)
-echo > "$ALGO_TEX"
+# Reset del file tex
+: > "$ALGO_TEX"
 for saved in $SAVE/$CODE_EXT; do
     # Elimina il main e la parte per il testing
     sed -i '/\/\*\*\*.*/,$d' "$saved"
