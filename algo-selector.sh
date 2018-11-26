@@ -27,6 +27,8 @@ for code in $REPO/$CODE_EXT; do
     for s in ${selected[*]}; do
         if grep -q "/$s " <<< "$code"; then
             cp "$code" "$SAVE/$(basename "$code")"
+            selected=("${selected[@]/$s}")
+            break
         fi
     done
 done
@@ -48,20 +50,18 @@ for saved in $SAVE/$CODE_EXT; do
     python - << EOF
 import re
 comment_state = False
-complexity_state = False
 lines = []
 new_file = []
 with open("${saved}", 'r') as f:
     lines = f.readlines()
     for l in lines:
-        if comment_state:
-            if re.match(".*Complexity\:", l) and not complexity_state:
-                complexity_state = True
+        if comment_state and not l.startswith('- '):
+            if re.match(".*Complexity\:", l):
                 new_file[-1] = new_file[-1] + '\n\n' + l
-            elif complexity_state:
-                new_file[-1] = new_file[-1] + l
             else:
                 new_file[-1] = new_file[-1] + l.strip() + ' '
+        elif comment_state and l.startswith('- '):
+            new_file.append(l.strip())
         else:
             new_file.append(l)
 
@@ -70,7 +70,6 @@ with open("${saved}", 'r') as f:
             new_file[-1] = new_file[-1].strip()
         if re.match("\*\/", l):
             comment_state = False
-            complexity_state = False
             new_file[-1] = new_file[-1][:-4] + '*/\n'
 with open("${saved}", 'w') as f:
     for l in new_file:
